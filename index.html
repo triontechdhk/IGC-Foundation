@@ -19,11 +19,34 @@
 </div>
 
 <nav class="navbar">
+    <a href="#home" class="nav-brand">Institute for Global Cooperation Foundation</a>
+
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
     <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+
+        <li class="dropdown">
+            <a href="#about" class="dropbtn">About ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">The IGC Story</a></li>
+                <li><a href="#">Vision & Mission</a></li>
+                <li><a href="#">Founders</a></li>
+                <li><a href="#">Leadership Team</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="#activities" class="dropbtn">Activities ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Capacity Development</a></li>
+                <li><a href="#">Policy Advocacy</a></li>
+                <li><a href="#">Conference</a></li>
+                <li><a href="#">Youth Dialogue</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#events">News</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </nav>
@@ -229,7 +252,45 @@
     </div>
 </section>
 
-<<section id="contact" class="reveal-on-scroll">
+<section id="contact" class="reveal-on-scroll">
+
+<section id="events" class="reveal-on-scroll">
+    <h2 class="section-title">Events</h2>
+    
+    <div class="events-grid">
+        
+        <div class="event-card">
+            <div class="event-image-wrapper">
+                <img src="event1.jpg" alt="Youth Summit" class="event-img">
+                <div class="event-date">
+                    <span class="day">15</span>
+                    <span class="month">MAR</span>
+                </div>
+            </div>
+            <div class="event-caption">
+                <h3>National Policy Hackathon</h3>
+                <p>Dhaka University Campus</p>
+                <a href="#" class="event-link">View Details →</a>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-image-wrapper">
+                <img src="event2.jpg" alt="Roundtable" class="event-img">
+                <div class="event-date">
+                    <span class="day">22</span>
+                    <span class="month">APR</span>
+                </div>
+            </div>
+            <div class="event-caption">
+                <h3>Regional Climate Dialogue</h3>
+                <p>Chittagong Conference Center</p>
+                <a href="#" class="event-link">View Details →</a>
+            </div>
+        </div>
+    </div>
+</section>
+    
     <h2 class="section-title">Get in Touch</h2>
 
     <div class="contact-container-modern centered-layout">
