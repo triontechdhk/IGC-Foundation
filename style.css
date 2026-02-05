@@ -103,7 +103,10 @@ section {
     padding: 15px 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    
+    /* CHANGE: This pushes Logo Left and Menu Right */
+    justify-content: space-between; 
+    
     position: fixed;
     top: 0;
     width: 100%;
@@ -115,6 +118,19 @@ section {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.nav-brand {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.2rem; /* Size of the text */
+    font-weight: 700;  /* Bold */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    /* Ensures it doesn't get too wide on small screens */
+    max-width: 60%;
+    line-height: 1.2;
+}
+
 .navbar.fade-in {
     opacity: 1;
     transform: translateY(0);
@@ -123,7 +139,7 @@ section {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 40px;
+    gap: 30px; /* Space between menu items */
     margin: 0;
     padding: 0;
 }
@@ -136,6 +152,17 @@ section {
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     position: relative;
+}
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .nav-brand {
+        font-size: 1rem; /* Smaller font on phones */
+        max-width: 70%;  /* Allow more width so it doesn't break too much */
+    }
+    
+    .nav-links {
+        gap: 0; /* Reset gap for mobile stack */
+    }
 }
 
 /* Animated Underline Effect */
@@ -1126,3 +1153,375 @@ button:active, .hero-btn:active {
 }
 
 @keyframes fadeIn { to { opacity: 1; } }
+/* ================== EVENTS SECTION ================== */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.event-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    background: #fff;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+/* Image Wrapper for Zoom Effect */
+.event-image-wrapper {
+    position: relative;
+    height: 250px; /* Fixed height for consistency */
+    overflow: hidden;
+}
+
+.event-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.event-card:hover .event-img {
+    transform: scale(1.1); /* Zoom in on hover */
+}
+
+/* Floating Date Badge */
+.event-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.event-date .day {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    line-height: 1;
+}
+
+.event-date .month {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+}
+
+/* Caption Area at Bottom */
+.event-caption {
+    padding: 25px;
+    background: white;
+    position: relative;
+    border-top: 4px solid var(--accent-color); /* Decorative accent line */
+}
+
+.event-caption h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    color: var(--primary-dark);
+    transition: color 0.3s;
+}
+
+.event-card:hover .event-caption h3 {
+    color: var(--accent-color);
+}
+
+.event-caption p {
+    margin: 0 0 20px 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Add a location icon via CSS */
+.event-caption p::before {
+    content: '📍';
+    font-size: 1rem;
+}
+
+/* "View Details" Link */
+.event-link {
+    display: inline-block;
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    opacity: 0.7;
+    transform: translateX(0);
+}
+
+.event-card:hover .event-link {
+    opacity: 1;
+    color: var(--accent-color);
+    transform: translateX(10px); /* Slides right on hover */
+}
+
+/* ================== DROPDOWN MENU STYLES ================== */
+
+/* 1. Parent Item Container */
+.dropdown {
+    position: relative; /* Anchor point for the dropdown */
+}
+
+/* 2. The Dropdown Menu (Hidden by default) */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Sits directly below the link */
+    left: 0;
+    min-width: 240px; /* Wide enough for text */
+    
+    /* Glassmorphic Style */
+    background: rgba(15, 23, 42, 0.95); /* Deep Blue/Black */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    border-radius: 12px;
+    padding: 10px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    
+    /* Animation: Hidden State */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    list-style: none;
+    z-index: 1001;
+}
+
+/* 3. Show Menu on Hover */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 4. Dropdown Items */
+.dropdown-menu li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 12px 25px;
+    color: #cbd5e1; /* Text Light */
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap; /* Prevents wrapping */
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+/* Remove the bottom underline animation from main links for sub-items */
+.dropdown-menu li a::after {
+    display: none; 
+}
+
+/* Hover Effect for Sub-items */
+.dropdown-menu li a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-color);
+    border-left-color: var(--accent-color);
+    padding-left: 30px; /* Slide right effect */
+}
+
+/* ================== MOBILE ADJUSTMENTS ================== */
+@media (max-width: 768px) {
+    /* Reset Positioning for Mobile Stack */
+    .dropdown-menu {
+        position: static; /* Stack normally in the flow */
+        background: rgba(255, 255, 255, 0.03); /* Lighter background */
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        min-width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none; /* Hidden until clicked/hovered */
+        padding: 0;
+    }
+    
+    /* On mobile, show the menu when the parent is hovered/tapped */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        animation: mobileSlideDown 0.3s ease;
+    }
+    
+    .dropdown-menu li a {
+        padding-left: 40px; /* Indent sub-items */
+        font-size: 14px;
+    }
+}
+
+@keyframes mobileSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================== RESPONSIVE & MOBILE POLISH ================== */
+
+/* --- TABLET & SMALL LAPTOP (1024px and down) --- */
+@media (max-width: 1024px) {
+    section {
+        padding: 80px 20px; /* Reduce section padding */
+    }
+
+    .hero h1 {
+        font-size: 3.5rem; /* Slightly smaller hero text */
+    }
+
+    /* Adjust Impact Section to fit tablet screens */
+    .impact-section-radial {
+        margin: 40px auto;
+        padding: 60px 20px;
+        width: 90%; /* Prevent overflow */
+    }
+    
+    .newsletter-wrapper {
+        width: 90%;
+    }
+}
+
+/* --- MOBILE LANDSCAPE & LARGE PHONES (768px and down) --- */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar: Handle the Long Brand Name */
+    .navbar {
+        padding: 15px 20px; /* Reduce side padding */
+    }
+
+    .nav-brand {
+        font-size: 0.95rem; /* Make text smaller to fit */
+        max-width: 75%;     /* Leave space for the hamburger icon */
+        line-height: 1.3;
+    }
+
+    .menu-toggle {
+        right: 20px; /* Align with new padding */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* 2. Hero Section */
+    .hero h1 {
+        font-size: 2.5rem; /* Smaller title */
+        white-space: normal; /* Allow text to wrap on mobile */
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+
+    /* 3. Mobile Navigation Menu (Glass Stack) */
+    .nav-links {
+        top: 70px; /* Push below the navbar */
+        background: rgba(15, 23, 42, 0.98); /* Make background darker/solid for readability */
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* 4. Fix Grids (Activities, Events, Stats) */
+    .activities-grid, 
+    .events-grid, 
+    .stats-grid {
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 30px;
+    }
+    
+    /* 5. Contact Section */
+    .contact-container-modern {
+        padding: 30px 20px; /* Less padding inside box */
+    }
+    
+    .contact-cards-row {
+        flex-direction: column; /* Stack info cards */
+        align-items: stretch;
+    }
+    
+    .info-card {
+        width: auto; /* Full width */
+    }
+    
+    .form-row {
+        flex-direction: column; /* Stack Name and Email inputs */
+        gap: 0;
+    }
+
+    /* 6. Gallery */
+    .carousel-container {
+        height: 300px; /* Shorter gallery on phone */
+    }
+    
+    .caption {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        width: 90%;
+        bottom: 20px;
+    }
+    
+    .prev, .next {
+        width: 35px; height: 35px;
+        font-size: 16px;
+        margin: 0 10px;
+    }
+}
+
+/* --- SMALL MOBILE PHONES (480px and down) --- */
+@media (max-width: 480px) {
+    
+    .nav-brand {
+        font-size: 0.85rem; /* Even smaller for iPhone SE / small Androids */
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    /* Reset the Floating Impact Section to be flat on small screens */
+    .impact-section-radial {
+        border-radius: 20px;
+        margin: 20px 0;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    /* Adjust Radial Stats */
+    .radial-progress {
+        width: 100px; 
+        height: 100px;
+    }
+    
+    .radial-details h3 {
+        font-size: 2.2rem;
+    }
+    
+    /* Hide floating shapes to improve performance on old phones */
+    .background-shapes {
+        display: none;
+    }
+}
